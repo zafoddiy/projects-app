@@ -46,10 +46,10 @@
             
             <div class="multi-select">
                 <label class="multi-select-label" for="projects">Available Projects:</label>
-                <select multiple size="8" name="projects">
-                    {% for project_name in project_list %}
-                    <option value="{{ project_name }}">{{project_name|safe}}</option>
-                    {% endfor %}
+                <select multiple size={8}>
+                    {projects.map((project) => {
+                    return <option value={project}>{project}</option>
+                    })}
                 </select>
             </div>
 

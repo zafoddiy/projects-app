@@ -1,10 +1,11 @@
 import sqlite3
 import re
-from flask import Flask, session, request, jsonify
+from flask import Flask, session, request, redirect
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 app.secret_key = "&&#1/vgfd2sHBX{x43jlpqw74@"
-
 
 """
 name: get_projects
@@ -20,16 +21,31 @@ def get_projects():
     return project_list
 
 """
+name: get_db
+description: Function to get all 3 db tables
+"""
+def get_db():
+    db = db_connection()
+    cursor = db.cursor()
+    cursor.execute("SELECT * from employees")
+    employee_list = cursor.fetchall()
+    cursor.execute("SELECT * from projects")
+    project_list = cursor.fetchall()
+    cursor.execute("SELECT * from employees_projects")
+    composite_list = cursor.fetchall()
+    cursor.close()
+    return [employee_list, project_list, composite_list]
+
+"""
 name: db_connections
 description: Connect to db. If unsuccessful, print error.
 """
 def db_connection():
-    connection = None
     try:
-        connection = sqlite3.connect('assignment.db')
+        return sqlite3.connect('./assignment.db')
     except sqlite3.error as e:
         print(e)
-    return connection
+        return None
 
 """
 name: insert_projects
@@ -74,10 +90,10 @@ def is_email_valid(email):
 name: index
 Description: index API
 """
-@app.route("/", methods=["POST", "GET"])
+@app.route("/", methods=["GET"])
 def index():
     session["projects"] = get_projects()
-    return jsonify(session["projects"])
+    return session["projects"]
 
 """
 name: assignment
@@ -86,19 +102,15 @@ description: assignment API, POST method to receive all of the fields.
 @app.route("/assignment", methods=["POST"])
 def assignment():
     # API requests for each field with given variable for frontend
-    fName = request.form["fName"]
-    email = request.form["email"]
-    exp_level = request.form["experience_level"]
-    tech_stack = request.form["tech_stack"]
-    selected_projects = request.form.getlist("projects")
-    proj_duration = request.form["proj_duration"]
-    addt_skills = request.form["add_skills"]
-    availability = request.form["conf_availability"]
+    data = request.get_json()
+    fName, email, exp_level, tech_stack, selected_projects, proj_duration, addt_skills, availability = \
+        data.get("fName"), data.get("email"), data.get("experienceLevel"), data.get("techStack"), \
+            data.get("selectedProjects"), data.get("projDuration"), data.get("addSkills"), data.get("confAvailability")
 
     # check if the fields are all valid and filled out
     if len(fName) == 0 or not is_email_valid(email) or exp_level == "" or tech_stack == "" \
-        or not selected_projects or proj_duration is None or availability is None:
-        return jsonify(session["projects"]), 400
+        or not selected_projects or proj_duration is None or not availability:
+        return session["projects"], 400
 
     # insert from API into employee table in db
     db = db_connection()
@@ -109,7 +121,7 @@ def assignment():
     employee_data_insert = (fName, email, exp_level, tech_stack, proj_duration, addt_skills)
 
     # update if email already exists in db, else insert into db
-    if employee_cursor.rowcount:
+    if len(employee_cursor.fetchall()):
         employee_cursor.execute("""UPDATE employees SET name = ?, experience_level = ?,
                                 tech_stack = ?, project_duration = ?, additional_skills = ? WHERE email = ?""", (employee_data_update))
         update_check = True
@@ -119,7 +131,16 @@ def assignment():
     employee_cursor.close()
     insert_projects(db, selected_projects, email, update_check)
     db.commit()
-    return jsonify(session["projects"]), 201
+    return redirect("index"), 201
+
+"""
+name: project_list
+Description: creates API to send database when GET request is called
+"""
+@app.route("/table", methods=["GET"])
+def project_list():
+    session["database"] = get_db()
+    return session["database"]
 
 if __name__ == '__main__':
     app.run()

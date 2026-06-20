@@ -5,8 +5,10 @@
       <excludeFolder url="file://$MODULE_DIR$/server/.venv/Include" />
       <excludeFolder url="file://$MODULE_DIR$/server/.venv/Lib" />
       <excludeFolder url="file://$MODULE_DIR$/server/.venv/Scripts" />
+      <excludeFolder url="file://$MODULE_DIR$/server/.venv" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/dataSources" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Python 3.11 (telia_project)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

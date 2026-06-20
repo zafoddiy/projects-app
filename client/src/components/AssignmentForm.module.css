@@ -1,0 +1,55 @@
+.assignmentform {
+    margin: 0 10px;
+    background-color: hsl(255 50% 71%);
+}
+
+.header {
+    font: bold 40px Arial;
+}
+
+p {
+    font: bold 14px Arial;
+}
+
+.inline {
+    display: inline-block;
+    font: bold 14px Arial;
+}
+
+.radio {
+    margin: 0 10px;
+    display: inline-block;
+    font: bold 14px Arial;
+    border-style: solid;
+    padding: 5px 5px;
+    border-radius: 10px;
+}
+
+.resizableinput {
+    overflow-x: hidden;
+    resize: horizontal;
+    display: inline-block;
+}
+
+.resizableinput > input {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0 10px;
+}
+
+.confirmation {
+    margin: 0 10px;
+}
+
+.saveform {
+    background-color: hsl(162 100% 50%);
+    border-radius: 10px;
+    border: 1px solid hsl(223 100% 50%);
+}
+
+.clearform {
+    margin: 0 10px;
+    background-color: hsl(0 0% 58%);
+    border-radius: 10px;
+    border: 1px solid hsl(223 100% 50%);
+}

@@ -13,7 +13,7 @@ projects = [
     "Customer Data Platform Integration"
 ]
 
-sql_connection = sqlite3.connect("assignment.db")
+sql_connection = sqlite3.connect("./assignment.db")
 sql_cursor = sql_connection.cursor()
 
 sql_cursor.execute("CREATE TABLE projects (id INTEGER PRIMARY KEY, project_name TEXT)")
