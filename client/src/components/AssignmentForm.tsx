@@ -75,7 +75,7 @@ const AssignmentForm = () => {
     }
 
     return (
-        <div className={styles.assignmentform}>
+        <div className={styles.assignmentForm}>
             <form onSubmit={handleSubmit}>
                 <h1 className={styles.header}>Project Assignment Form</h1>
                 <p>Complete your profile to get assigned to internal projects.</p>
@@ -176,7 +176,7 @@ const AssignmentForm = () => {
                 </div>
                 <br/><br/>
                 <div className={styles.inline}>Additional Skills (optional):</div>
-                <span className={styles.resizableinput}>
+                <span className={styles.resizableInput}>
                     <input
                         type="text"
                         placeholder="e.g., Python, Docker, React"
@@ -195,13 +195,13 @@ const AssignmentForm = () => {
                 <div className={styles.inline}>I confirm my availability for the selected projects:</div>
                 <br/><br/>
                 <input
-                    className={styles.saveform}
+                    className={styles.saveForm}
                     type="submit"
                     value="Save Profile"
                     disabled={!confAvailability}
                 />
                 <input
-                    className={styles.clearform}
+                    className={styles.clearForm}
                     type="reset"
                     value="Clear Form"
                 />

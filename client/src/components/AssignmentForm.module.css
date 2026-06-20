@@ -1,4 +1,4 @@
-.assignmentform {
+.assignmentForm {
     margin: 0 10px;
     background-color: hsl(255 50% 71%);
 }
@@ -25,13 +25,13 @@ p {
     border-radius: 10px;
 }
 
-.resizableinput {
+.resizableInput {
     overflow-x: hidden;
     resize: horizontal;
     display: inline-block;
 }
 
-.resizableinput > input {
+.resizableInput > input {
     width: 100%;
     box-sizing: border-box;
     margin: 0 10px;
@@ -41,13 +41,13 @@ p {
     margin: 0 10px;
 }
 
-.saveform {
+.saveForm {
     background-color: hsl(162 100% 50%);
     border-radius: 10px;
     border: 1px solid hsl(223 100% 50%);
 }
 
-.clearform {
+.clearForm {
     margin: 0 10px;
     background-color: hsl(0 0% 58%);
     border-radius: 10px;
