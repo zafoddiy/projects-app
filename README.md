@@ -6,5 +6,5 @@ Server-side (Flask) requires sqlite3, flask, flask-CORS. Client-side (React) req
 # Usage
 Run the server-side app.py file first. Use vite to run the client-side app.
 # Examples
-![Screenshot of the employee project assignment form.](/assignment-example.PNG)
-![Screenshot of the tables of employees and projects.](/table-example.PNG)
+![Screenshot of the employee project assignment form.](/assignment-example.png)
+![Screenshot of the tables of employees and projects.](/table-example.png)
